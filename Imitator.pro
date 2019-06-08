@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,13 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Presenter/mainwindowcontract.cpp \
-        Presenter/mainwindowpresenter.cpp \
         main.cpp \
         View\mainWindow.cpp
 
 HEADERS += \
-        Presenter/mainwindowcontract.h \
+        Model/socketudpmodel.h \
         View\mainWindow.h \
         Presenter\mainWindowPresenter.h
 

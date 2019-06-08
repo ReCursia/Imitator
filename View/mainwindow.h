@@ -3,14 +3,12 @@
 
 #include <QMainWindow>
 
-#include <Presenter/mainwindowcontract.h>
-#include <Presenter/mainwindowpresenter.h>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow, public MainWindowContract
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -23,10 +21,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    MainWindowPresenter* presenter;
-    void setStatusMessage(QString message);
-    void setProgressStatus(int value);
-    void setStartButtonLabel(QString label);
 };
 
 #endif // MAINWINDOW_H
