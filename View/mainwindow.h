@@ -3,12 +3,15 @@
 
 #include <QMainWindow>
 
+#include <Presenter/socketudppresenter.h>
+
+#include "Contract/socketudpcontract.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public SocketUdpContract
 {
     Q_OBJECT
 
@@ -21,6 +24,13 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SocketUdpPresenter* presenter;
+public:
+    void setStartButtonLabel(QString str);
+    void setProgressBarLabel(QString str);
+    void setProgressBarValue(int value);
+    void setCounterValue(int value);
+    void setStatusBarMessage(QString message);
 };
 
 #endif // MAINWINDOW_H

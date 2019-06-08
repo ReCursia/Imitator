@@ -16,53 +16,17 @@ private:
     QUdpSocket* socket;
     QTimer* timer;
     QList<double> data;
-    double getCheckSum(){
-        double checkSum = 0.0;
-        foreach(double value,data){
-            checkSum += value;
-        }
-        return checkSum;
-    }
+    double getCheckSum();
+private slots:
+    void sendDatagram();
 public:
-    SocketUdpModel(){
-        //Counter
-        transmissionCounter = 0;
-        //Timer
-        timer = new QTimer();
-        timer->setInterval(REPEAT_INTERVAL);
-        connect(timer,SIGNAL(timeout()),SLOT(sendDatagram()));
-        //Status
-        isWorking = false;
-        //Socket
-        socket = new QUdpSocket(this);
-        socket->bind(QHostAddress::LocalHost);
-    }
-    ~SocketUdpModel(){
-        delete socket;
-        delete timer;
-    }
-    int getCounter(){
-        return transmissionCounter;
-    }
-    void startTransmission(){
-        if(!isWorking){
-            timer->start();
-            isWorking = true;
-        }
-    }
-    void stopTransmission(){
-        if(isWorking){
-            timer->stop();
-            isWorking = false;
-        }
-    }
-    void setData(QList<double> data){
-        this->data = data;
-    }
-public slots:
-    void sendDatagram(){
-        qDebug() << data << " " << getCheckSum();
-    }
+    SocketUdpModel();
+    ~SocketUdpModel();
+    int getCounter();
+    void startTransmission();
+    void stopTransmission();
+    void setData(QList<double> data);
 };
+
 
 #endif // SOCKETUDPMODEL_H
