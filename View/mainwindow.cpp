@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     presenter = new SocketUdpPresenter(this);
     ui->setupUi(this);
+    //TODO
+    ui->listWidget->addItem("5");
+    ui->listWidget->addItem("4.0");
 }
 
 MainWindow::~MainWindow()
@@ -30,16 +33,6 @@ void MainWindow::setStartButtonLabel(QString str)
     ui->startButton->setText(str);
 }
 
-void MainWindow::setProgressBarLabel(QString str)
-{
-    ui->progressBar->setFormat(str);
-}
-
-void MainWindow::setProgressBarValue(int value)
-{
-    ui->progressBar->setValue(value);
-}
-
 void MainWindow::setCounterValue(int value)
 {
     ui->transmissionCounter->setText(QString::number(value));
@@ -47,5 +40,14 @@ void MainWindow::setCounterValue(int value)
 
 void MainWindow::setStatusBarMessage(QString message)
 {
-    ui->statusBar->showMessage(message);
+    ui->statusBar->showMessage(message,STATUS_BAR_MESSAGE_TIMEOUT);
+}
+
+QList<double> MainWindow::getDataFromWidgetList()
+{
+    QList<double> values;
+    for(int i = 0; i < ui->listWidget->count();i++){
+        values.append(ui->listWidget->item(i)->text().toDouble());
+    }
+    return values;
 }

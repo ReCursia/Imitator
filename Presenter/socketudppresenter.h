@@ -5,23 +5,27 @@
 
 #include <Model/socketudpmodel.h>
 
-#include <Contract/socketudpcontract.h>
+#include <Contract/socketudpcontractpresenter.h>
+#include <Contract/socketudpcontractview.h>
 
-class SocketUdpPresenter: public QObject
+class SocketUdpPresenter: public QObject, public SocketUdpContractPresenter
 {
 private:
     Q_OBJECT
     SocketUdpModel* model;
-    SocketUdpContract* view;
-    enum Status {ON,OFF};
+    SocketUdpContractView* view;
     Status status;
     void stopTransmission();
     void startTransmission();
 public:
-    SocketUdpPresenter(SocketUdpContract* view);
+    SocketUdpPresenter(SocketUdpContractView* view);
     ~SocketUdpPresenter();
     void onAcceptButtonPressed();
     void onStartButtonPressed();
+    // SocketUdpContractPresenter interface
+public:
+    void counterValueChanged(int value);
+    void statusBarMessageChanged(QString message);
 };
 
 #endif // SOCKETUDPPRESENTER_H

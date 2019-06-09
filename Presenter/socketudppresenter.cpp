@@ -13,10 +13,10 @@ void SocketUdpPresenter::startTransmission()
     view->setStartButtonLabel("Остановка");
 }
 
-SocketUdpPresenter::SocketUdpPresenter(SocketUdpContract* view)
+SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
 {
     this->view = view;
-    status = OFF;
+    model = new SocketUdpModel(this);
 }
 
 SocketUdpPresenter::~SocketUdpPresenter()
@@ -27,17 +27,31 @@ SocketUdpPresenter::~SocketUdpPresenter()
 
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
-    //Get data from table
+    model->setData(view->getDataFromWidgetList());
+    view->setStatusBarMessage("Данные утверждены"); //TODO закинуть как константы
 }
 
 void SocketUdpPresenter::onStartButtonPressed()
 {
-    switch(status){
+    switch(model->getCurrentStatus()){
     case OFF:
         startTransmission();
         break;
     case ON:
         stopTransmission();
         break;
+    case ERROR:
+        //Выбросить ошибку?
+        break;
     }
+}
+
+void SocketUdpPresenter::counterValueChanged(int value)
+{
+    view->setCounterValue(value);
+}
+
+void SocketUdpPresenter::statusBarMessageChanged(QString message)
+{
+    view->setStatusBarMessage(message);
 }

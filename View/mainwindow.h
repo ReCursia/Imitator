@@ -5,13 +5,13 @@
 
 #include <Presenter/socketudppresenter.h>
 
-#include "Contract/socketudpcontract.h"
+#include "Contract/socketudpcontractview.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow, public SocketUdpContract
+class MainWindow : public QMainWindow, public SocketUdpContractView
 {
     Q_OBJECT
 
@@ -25,12 +25,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SocketUdpPresenter* presenter;
+    const int STATUS_BAR_MESSAGE_TIMEOUT = 10000; //ms
 public:
     void setStartButtonLabel(QString str);
-    void setProgressBarLabel(QString str);
-    void setProgressBarValue(int value);
     void setCounterValue(int value);
     void setStatusBarMessage(QString message);
+    QList<double> getDataFromWidgetList();
 };
 
 #endif // MAINWINDOW_H

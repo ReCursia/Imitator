@@ -5,24 +5,32 @@
 #include "QUdpSocket"
 #include "QTimer"
 
+#include <Contract/socketudpcontractpresenter.h>
+
+enum Status {OFF,ON,ERROR};
+
 class SocketUdpModel: public QObject
 {
-
 private:
     Q_OBJECT
     const int REPEAT_INTERVAL = 1000; //ms
+    const int HEADER = 0x55AA;
     int transmissionCounter;
     bool isWorking;
+    Status status;
     QUdpSocket* socket;
     QTimer* timer;
     QList<double> data;
     double getCheckSum();
+    QString getCurrentStatusMessage();
+    SocketUdpContractPresenter* presenter;
 private slots:
     void sendDatagram();
+    void readyRead(); //TESTING
 public:
-    SocketUdpModel();
+    SocketUdpModel(SocketUdpContractPresenter* presenter);
     ~SocketUdpModel();
-    int getCounter();
+    Status getCurrentStatus();
     void startTransmission();
     void stopTransmission();
     void setData(QList<double> data);
