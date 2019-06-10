@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 
-#include <Presenter/socketudppresenter.h>
+#include <Presenter/SocketUdpPresenter.h>
 
-#include "Contract/socketudpcontractview.h"
+#include "Contract/SocketUdpContractView.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +31,11 @@ public:
     void setCounterValue(int value);
     void setStatusBarMessage(QString message);
     QList<double> getDataFromWidgetList();
+
+    // SocketUdpContractView interface
+public:
+    void lightOnLed();
+    void lightOffLed();
 };
 
 #endif // MAINWINDOW_H

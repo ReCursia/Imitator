@@ -1,4 +1,4 @@
-#include "socketudpmodel.h"
+#include "SocketUdpModel.h"
 
 SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     this->presenter = presenter;
@@ -11,8 +11,10 @@ SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     timer->setInterval(REPEAT_INTERVAL);
     connect(timer,SIGNAL(timeout()),SLOT(sendDatagram()));
     //Socket
+    QHostAddress adress;
+    adress.setAddress(3232235631);
     socket = new QUdpSocket(this);
-    socket->bind(QHostAddress::LocalHost,1234);
+    socket->bind(adress,61924);
     connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead())); //TESTING
 }
 
@@ -61,19 +63,12 @@ void SocketUdpModel::setData(QList<double> data){
 }
 
 void SocketUdpModel::sendDatagram(){
-    socket->writeDatagram("HELLLO",QHostAddress::LocalHost,1234); //Port 1234 ex.
+    //TESTING
+    QHostAddress adress;
+    adress.setAddress(3232235631);
+    socket->writeDatagram("HELLLO",adress,61924); //Port 1234 ex.
 
     presenter->counterValueChanged(++transmissionCounter);
-}
-
-void SocketUdpModel::readyRead()
-{
-    QByteArray buffer;
-    buffer.resize(socket->pendingDatagramSize());
-    QHostAddress sender;
-    quint16 port;
-    socket->readDatagram(buffer.data(),buffer.size(),&sender,&port);
-    qDebug() << sender.toString() << port << "Message: " << buffer;
 }
 
 double SocketUdpModel::getCheckSum(){
@@ -83,3 +78,15 @@ double SocketUdpModel::getCheckSum(){
     }
     return checkSum;
 }
+
+/*
+void SocketUdpModel::readyRead()
+{
+    QByteArray buffer;
+    buffer.resize(socket->pendingDatagramSize());
+    QHostAddress sender;
+    quint16 port;
+    socket->readDatagram(buffer.data(),buffer.size(),&sender,&port);
+    qDebug() << sender.toString() << port << "Message: " << buffer;
+}
+*/

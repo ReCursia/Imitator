@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -50,4 +50,14 @@ QList<double> MainWindow::getDataFromWidgetList()
         values.append(ui->listWidget->item(i)->text().toDouble());
     }
     return values;
+}
+
+void MainWindow::lightOnLed()
+{
+    ui->led->turnOn();
+}
+
+void MainWindow::lightOffLed()
+{
+    ui->led->turnOff();
 }

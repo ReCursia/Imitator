@@ -5,7 +5,7 @@
 #include "QUdpSocket"
 #include "QTimer"
 
-#include <Contract/socketudpcontractpresenter.h>
+#include <Contract/SocketUdpContractPresenter.h>
 
 enum Status {OFF,ON,ERROR};
 
@@ -26,7 +26,7 @@ private:
     SocketUdpContractPresenter* presenter;
 private slots:
     void sendDatagram();
-    void readyRead(); //TESTING
+    //void readyRead(); //TESTING
 public:
     SocketUdpModel(SocketUdpContractPresenter* presenter);
     ~SocketUdpModel();

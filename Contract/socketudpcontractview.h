@@ -17,6 +17,9 @@ public:
     virtual void setStatusBarMessage(QString message) = 0;
     //Data
     virtual QList<double> getDataFromWidgetList() = 0;
+    //Led
+    virtual void lightOnLed() = 0;
+    virtual void lightOffLed() = 0;
 };
 
 #endif // SOCKETUDPCONTRACT_H

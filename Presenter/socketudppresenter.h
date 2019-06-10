@@ -3,10 +3,10 @@
 
 #include <QObject>
 
-#include <Model/socketudpmodel.h>
+#include <Model/SocketUdpModel.h>
 
-#include <Contract/socketudpcontractpresenter.h>
-#include <Contract/socketudpcontractview.h>
+#include <Contract/SocketUdpContractPresenter.h>
+#include <Contract/SocketUdpContractView.h>
 
 class SocketUdpPresenter: public QObject, public SocketUdpContractPresenter
 {

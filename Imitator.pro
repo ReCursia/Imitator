@@ -25,22 +25,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Contract/socketudpcontractpresenter.cpp \
-        Contract/socketudpcontractview.cpp \
-        Led/led.cpp \
-        Model/socketudpmodel.cpp \
-        Presenter/socketudppresenter.cpp \
+        Contract/SocketUdpContractPresenter.cpp \
+        Contract/SocketUdpContractView.cpp \
+        Led/Led.cpp \
+        Model/SocketUdpModel.cpp \
+        Presenter/SocketUdpPresenter.cpp \
         main.cpp \
         View\mainWindow.cpp
 
 HEADERS += \
-        Contract/socketudpcontractpresenter.h \
-        Contract/socketudpcontractview.h \
-        Led/led.h \
-        Model/socketudpmodel.h \
-        Presenter/socketudppresenter.h \
+        Contract/SocketUdpContractPresenter.h \
+        Contract/SocketUdpContractView.h \
+        Led/Led.h \
+        Model/SocketUdpModel.h \
+        Presenter/SocketUdpPresenter.h \
         View\mainWindow.h \
-        Presenter\mainWindowPresenter.h
 
 FORMS += \
         View\mainwindow.ui

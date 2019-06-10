@@ -1,15 +1,17 @@
-#include "socketudppresenter.h"
+#include "SocketUdpPresenter.h"
 
 
 void SocketUdpPresenter::stopTransmission()
 {
     model->stopTransmission();
+    view->lightOffLed();
     view->setStartButtonLabel("Запуск");
 }
 
 void SocketUdpPresenter::startTransmission()
 {
     model->startTransmission();
+    view->lightOnLed();
     view->setStartButtonLabel("Остановка");
 }
 

@@ -1,4 +1,4 @@
-#include "socketudpcontractview.h"
+#include "SocketUdpContractView.h"
 
 
 SocketUdpContractView::~SocketUdpContractView()
