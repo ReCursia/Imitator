@@ -42,6 +42,8 @@ int DataModel::size()
 QByteArray DataModel::getDatagramm()
 {
     //TODO implement
+    QByteArray placeHolder;
+    return placeHolder;
 }
 
 float DataModel::getCheckSum()
