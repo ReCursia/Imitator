@@ -1,50 +1,66 @@
 #include "SocketUdpPresenter.h"
 
+SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
+{
+    this->view = view;
+    socketModel = new SocketUdpModel(this);
+    dataModel = new DataModel();
+    //Connect model to listView
+    view->setListModel(dataModel->getModel());
+}
+
+SocketUdpPresenter::~SocketUdpPresenter()
+{
+    delete socketModel;
+    delete dataModel;
+    delete view;
+}
 
 void SocketUdpPresenter::stopTransmission()
 {
-    model->stopTransmission();
+    socketModel->stopTransmission();
     view->lightOffLed();
     view->setStartButtonLabel("Запуск");
 }
 
 void SocketUdpPresenter::startTransmission()
 {
-    model->startTransmission();
+    socketModel->startTransmission();
     view->lightOnLed();
     view->setStartButtonLabel("Остановка");
 }
 
-SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
-{
-    this->view = view;
-    model = new SocketUdpModel(this);
-}
-
-SocketUdpPresenter::~SocketUdpPresenter()
-{
-    delete model;
-    delete view;
-}
-
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
-    model->setData(view->getDataFromWidgetList());
-    view->setStatusBarMessage("Данные утверждены"); //TODO закинуть как константы
+    socketModel->setDatagramData(dataModel->getDatagramm());
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]); //TODO закинуть как константы
 }
 
 void SocketUdpPresenter::onStartButtonPressed()
 {
-    switch(model->getCurrentStatus()){
+    switch(socketModel->getCurrentStatus()){
     case OFF:
         startTransmission();
         break;
     case ON:
         stopTransmission();
         break;
-    case ERROR:
-        //Выбросить ошибку?
-        break;
+    }
+}
+
+void SocketUdpPresenter::onAddButtonPressed()
+{
+    dataModel->addValue(view->getEditLineText());
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[LINE_ADDED]);
+}
+
+void SocketUdpPresenter::onDeleteButtonPressed()
+{
+    if(view->hasSelectedRow()){
+        dataModel->deleteValue(view->getSelectedRowIndex());
+        view->setStatusBarMessage(STATUS_BAR_MESSAGE[LINE_DELETED]);
+    }else{
+        view->setStatusBarMessage(STATUS_BAR_MESSAGE[CHOOSE_LINE]);
     }
 }
 

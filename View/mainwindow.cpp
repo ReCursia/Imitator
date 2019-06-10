@@ -1,15 +1,12 @@
 #include "MainWindow.h"
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    presenter = new SocketUdpPresenter(this);
     ui->setupUi(this);
-    //TODO
-    ui->listWidget->addItem("5");
-    ui->listWidget->addItem("4.0");
+    presenter = new SocketUdpPresenter(this);
 }
 
 MainWindow::~MainWindow()
@@ -40,16 +37,7 @@ void MainWindow::setCounterValue(int value)
 
 void MainWindow::setStatusBarMessage(QString message)
 {
-    ui->statusBar->showMessage(message,STATUS_BAR_MESSAGE_TIMEOUT);
-}
-
-QList<double> MainWindow::getDataFromWidgetList()
-{
-    QList<double> values;
-    for(int i = 0; i < ui->listWidget->count();i++){
-        values.append(ui->listWidget->item(i)->text().toDouble());
-    }
-    return values;
+    ui->statusBar->showMessage(message,STATUS_BAR_DEFAULT_TIMEOUT);
 }
 
 void MainWindow::lightOnLed()
@@ -60,4 +48,34 @@ void MainWindow::lightOnLed()
 void MainWindow::lightOffLed()
 {
     ui->led->turnOff();
+}
+
+void MainWindow::setListModel(QStringListModel *model)
+{
+    ui->listView->setModel(model);
+}
+
+QString MainWindow::getEditLineText()
+{
+    return ui->lineEdit->text();
+}
+
+bool MainWindow::hasSelectedRow()
+{
+    return !(ui->listView->selectionModel()->selectedRows().isEmpty());
+}
+
+int MainWindow::getSelectedRowIndex()
+{
+    return ui->listView->selectionModel()->selectedRows().first().row();
+}
+
+void MainWindow::on_addButton_clicked()
+{
+    presenter->onAddButtonPressed();
+}
+
+void MainWindow::on_deleteButton_clicked()
+{
+    presenter->onDeleteButtonPressed();
 }

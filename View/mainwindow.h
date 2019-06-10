@@ -11,31 +11,38 @@ namespace Ui {
 class MainWindow;
 }
 
+const int STATUS_BAR_DEFAULT_TIMEOUT = 5000; //ms
+
+
 class MainWindow : public QMainWindow, public SocketUdpContractView
 {
     Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
 private slots:
+
     void on_acceptButton_clicked();
     void on_startButton_clicked();
+    void on_addButton_clicked();
+
+    void on_deleteButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     SocketUdpPresenter* presenter;
-    const int STATUS_BAR_MESSAGE_TIMEOUT = 10000; //ms
 public:
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
     void setStartButtonLabel(QString str);
     void setCounterValue(int value);
     void setStatusBarMessage(QString message);
-    QList<double> getDataFromWidgetList();
+    void lightOnLed();
+    void lightOffLed();
 
     // SocketUdpContractView interface
 public:
-    void lightOnLed();
-    void lightOffLed();
+    void setListModel(QStringListModel *model);
+    QString getEditLineText();
+    bool hasSelectedRow();
+    int getSelectedRowIndex();
 };
 
 #endif // MAINWINDOW_H

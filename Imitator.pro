@@ -28,6 +28,7 @@ SOURCES += \
         Contract/SocketUdpContractPresenter.cpp \
         Contract/SocketUdpContractView.cpp \
         Led/Led.cpp \
+        Model/DataModel.cpp \
         Model/SocketUdpModel.cpp \
         Presenter/SocketUdpPresenter.cpp \
         main.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
         Contract/SocketUdpContractPresenter.h \
         Contract/SocketUdpContractView.h \
         Led/Led.h \
+        Model/DataModel.h \
         Model/SocketUdpModel.h \
         Presenter/SocketUdpPresenter.h \
         View\mainWindow.h \

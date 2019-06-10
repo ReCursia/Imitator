@@ -4,36 +4,37 @@
 #include "QByteArray"
 #include "QUdpSocket"
 #include "QTimer"
-
+#include "QStringListModel"
+#include "DataModel.h"
 #include <Contract/SocketUdpContractPresenter.h>
 
-enum Status {OFF,ON,ERROR};
+enum Status {OFF,ON};
+
+const int REPEAT_INTERVAL = 1000; //ms
+const int HEADER = 0x55AA;
 
 class SocketUdpModel: public QObject
 {
 private:
     Q_OBJECT
-    const int REPEAT_INTERVAL = 1000; //ms
-    const int HEADER = 0x55AA;
     int transmissionCounter;
     bool isWorking;
     Status status;
     QUdpSocket* socket;
     QTimer* timer;
-    QList<double> data;
-    double getCheckSum();
-    QString getCurrentStatusMessage();
     SocketUdpContractPresenter* presenter;
+    QByteArray datagram;
+private:
+    QString getCurrentStatusMessage();
 private slots:
     void sendDatagram();
-    //void readyRead(); //TESTING
 public:
     SocketUdpModel(SocketUdpContractPresenter* presenter);
     ~SocketUdpModel();
     Status getCurrentStatus();
     void startTransmission();
     void stopTransmission();
-    void setData(QList<double> data);
+    void setDatagramData(QByteArray array);
 };
 
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>302</height>
+    <height>304</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,17 +39,40 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QListWidget" name="listWidget">
+          <widget class="QListView" name="listView">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
           </widget>
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Ввод</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit">
+             <property name="clearButtonEnabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QPushButton" name="addButton">
              <property name="sizePolicy">
@@ -258,7 +281,7 @@
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="sizeGripEnabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
