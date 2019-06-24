@@ -2,12 +2,9 @@
 #define SOCKETUDPPRESENTER_H
 
 #include <QObject>
-
 #include <Model/SocketUdpModel.h>
-
 #include <Contract/SocketUdpContractPresenter.h>
 #include <Contract/SocketUdpContractView.h>
-
 
 const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен"};
 enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED};
@@ -22,7 +19,6 @@ private:
     SocketUdpModel* socketModel;
     DataModel* dataModel;
     SocketUdpContractView* view;
-    Status status;
 private:
     void stopTransmission();
     void startTransmission();
@@ -33,8 +29,6 @@ public:
     void onStartButtonPressed();
     void onAddButtonPressed();
     void onDeleteButtonPressed();
-    // SocketUdpContractPresenter interface
-public:
     void counterValueChanged(int value);
     void statusBarMessageChanged(QString message);
 };

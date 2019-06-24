@@ -34,7 +34,7 @@ void SocketUdpPresenter::startTransmission()
 
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
-    socketModel->setDatagramData(dataModel->getDatagramm());
+    socketModel->setDatagramData(dataModel->getDatagram());
     view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
 }
 

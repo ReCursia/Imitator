@@ -2,7 +2,7 @@
 #define SOCKETUDPCONTRACT_H
 
 #include <QObject>
-#include<QStringListModel>
+#include <QStringListModel>
 
 class SocketUdpContractView
 {

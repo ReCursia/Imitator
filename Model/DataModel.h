@@ -3,6 +3,7 @@
 
 #include "QList"
 #include "QStringListModel"
+
 class DataModel
 {
 private:
@@ -11,15 +12,11 @@ private:
 private:
     double getCheckSum();
 public:
-
     DataModel();
     ~DataModel();
-    float getValue(int i);
     void addValue(QString value);
     void deleteValue(int i);
-    void clear();
-    int size();
-    QByteArray getDatagramm();
+    QByteArray getDatagram();
     QStringListModel* getModel();
 };
 
