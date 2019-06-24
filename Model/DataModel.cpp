@@ -19,7 +19,7 @@ float DataModel::getValue(int i)
 
 void DataModel::addValue(QString value)
 {
-    values.append(QString::number(value.toFloat()));
+    values.append(QString::number(value.toDouble()));
     model->setStringList(values); //TODO исправить! каждый раз переопредять лист для модели? Возможно некорректно?
 }
 
@@ -41,16 +41,19 @@ int DataModel::size()
 
 QByteArray DataModel::getDatagramm()
 {
-    //TODO implement
-    QByteArray placeHolder;
-    return placeHolder;
+    QByteArray datagram;
+    foreach(QString value,values){
+        datagram.append(value).append(' ');
+    }
+    datagram.append(QString::number(getCheckSum()));
+    return datagram;
 }
 
-float DataModel::getCheckSum()
+double DataModel::getCheckSum()
 {
-    float sum = 0;
+    double sum = 0;
     foreach(QString value,values){
-        sum += value.toFloat();
+        sum += value.toDouble();
     }
     return sum;
 }

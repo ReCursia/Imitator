@@ -1,4 +1,5 @@
 #include "SocketUdpModel.h"
+#include "QDebug"
 
 SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     this->presenter = presenter;
@@ -11,9 +12,8 @@ SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     timer->setInterval(REPEAT_INTERVAL);
     connect(timer,SIGNAL(timeout()),SLOT(sendDatagram()));
     //Socket
-    QHostAddress adress;
-    adress.setAddress(3232235631);
     socket = new QUdpSocket(this);
+    adress.setAddress(QHostAddress::LocalHost);
     socket->bind(adress,61924);
 }
 
@@ -61,11 +61,7 @@ void SocketUdpModel::setDatagramData(QByteArray array)
 
 
 void SocketUdpModel::sendDatagram(){
-    //TESTING
-    /*
-    QHostAddress adress;
-    adress.setAddress(3232235631);
-    socket->writeDatagram("HELLLO",adress,61924); //Port 1234 ex.
-    */
+    socket->writeDatagram(datagram,adress,61924); //Port 1234 ex.
+    qDebug() << QString::fromStdString(datagram.toStdString());
     presenter->counterValueChanged(++transmissionCounter);
 }

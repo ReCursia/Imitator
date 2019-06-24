@@ -7,6 +7,8 @@ SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
     dataModel = new DataModel();
     //Connect model to listView
     view->setListModel(dataModel->getModel());
+    //Led is OFF
+    view->lightOffLed();
 }
 
 SocketUdpPresenter::~SocketUdpPresenter()
@@ -20,20 +22,20 @@ void SocketUdpPresenter::stopTransmission()
 {
     socketModel->stopTransmission();
     view->lightOffLed();
-    view->setStartButtonLabel("Запуск");
+    view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
 }
 
 void SocketUdpPresenter::startTransmission()
 {
     socketModel->startTransmission();
     view->lightOnLed();
-    view->setStartButtonLabel("Остановка");
+    view->setStartButtonLabel(START_BUTTON_MESSAGE[STOP]);
 }
 
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
     socketModel->setDatagramData(dataModel->getDatagramm());
-    view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]); //TODO закинуть как константы
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
 }
 
 void SocketUdpPresenter::onStartButtonPressed()

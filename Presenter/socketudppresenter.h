@@ -12,6 +12,9 @@
 const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен"};
 enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED};
 
+const QStringList START_BUTTON_MESSAGE = {"Запуск","Остановка"};
+enum StartButtonMessage {START,STOP};
+
 class SocketUdpPresenter: public QObject, public SocketUdpContractPresenter
 {
 private:

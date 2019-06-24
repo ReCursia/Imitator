@@ -21,6 +21,7 @@ private:
     bool isWorking;
     Status status;
     QUdpSocket* socket;
+    QHostAddress adress;
     QTimer* timer;
     SocketUdpContractPresenter* presenter;
     QByteArray datagram;

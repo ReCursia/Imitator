@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>304</height>
+    <width>519</width>
+    <height>309</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Программа имитации</string>
+   <string>Сервер имитатора</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
@@ -54,6 +54,9 @@
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
            </property>
           </widget>
          </item>

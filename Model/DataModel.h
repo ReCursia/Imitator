@@ -8,6 +8,8 @@ class DataModel
 private:
     QStringList values;
     QStringListModel* model;
+private:
+    double getCheckSum();
 public:
 
     DataModel();
@@ -18,7 +20,6 @@ public:
     void clear();
     int size();
     QByteArray getDatagramm();
-    float getCheckSum();
     QStringListModel* getModel();
 };
 
