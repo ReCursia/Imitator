@@ -14,7 +14,7 @@ SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     //Socket
     socket = new QUdpSocket(this);
     adress.setAddress(QHostAddress::LocalHost);
-    socket->bind(adress,61924);
+    socket->bind(adress,1234);
 }
 
 SocketUdpModel::~SocketUdpModel(){
@@ -61,7 +61,7 @@ void SocketUdpModel::setDatagramData(QByteArray array)
 
 
 void SocketUdpModel::sendDatagram(){
-    socket->writeDatagram(datagram,adress,61924); //Port 1234 ex.
+    socket->writeDatagram(datagram,adress,3456); //Port 1234 ex.
     qDebug() << QString::fromStdString(datagram.toStdString());
     presenter->counterValueChanged(++transmissionCounter);
 }
