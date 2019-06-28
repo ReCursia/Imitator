@@ -7,4 +7,5 @@
 class EmptyData : public std::exception
 {
 };
+
 #endif // EMPTYDATA_H
