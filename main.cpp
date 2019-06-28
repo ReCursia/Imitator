@@ -1,6 +1,6 @@
 #include <QApplication>
 #include "View/MainWindow.h"
-#include "Model/SocketUdpModel.h"
+#include "Models/SocketUdpModel.h"
 
 int main(int argc, char *argv[])
 {

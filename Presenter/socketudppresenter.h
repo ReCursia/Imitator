@@ -2,12 +2,12 @@
 #define SOCKETUDPPRESENTER_H
 
 #include <QObject>
-#include <Model/SocketUdpModel.h>
-#include <Contract/SocketUdpContractPresenter.h>
-#include <Contract/SocketUdpContractView.h>
+#include <Models/SocketUdpModel.h>
+#include <Contracts/SocketUdpContractPresenter.h>
+#include <Contracts/SocketUdpContractView.h>
 
-const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен"};
-enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED};
+const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен","Нет данных для отправления","Нет данных для утверждения"};
+enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED,NO_DATA_TO_SEND,NO_DATA_TO_ACCEPT};
 
 const QStringList START_BUTTON_MESSAGE = {"Запуск","Остановка"};
 enum StartButtonMessage {START,STOP};
@@ -22,6 +22,8 @@ private:
 private:
     void stopTransmission();
     void startTransmission();
+    void handleNoDataToSend();
+    void handleNoDataToAccept();
 public:
     SocketUdpPresenter(SocketUdpContractView* view);
     ~SocketUdpPresenter();

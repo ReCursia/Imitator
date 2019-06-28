@@ -6,7 +6,7 @@
 #include "QTimer"
 #include "QStringListModel"
 #include "DataModel.h"
-#include <Contract/SocketUdpContractPresenter.h>
+#include <Contracts/SocketUdpContractPresenter.h>
 
 enum Status {OFF,ON};
 
@@ -27,6 +27,7 @@ private:
     SocketUdpContractPresenter* presenter;
     QByteArray datagram;
     QString getCurrentStatusMessage();
+    bool hasData();
 private slots:
     void sendDatagram();
 public:

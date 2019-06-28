@@ -1,5 +1,6 @@
 #include "SocketUdpModel.h"
 #include "QDebug"
+#include "Exceptions/NoDataToSend.h"
 
 SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     this->presenter = presenter;
@@ -38,7 +39,14 @@ QString SocketUdpModel::getCurrentStatusMessage()
     }
 }
 
+bool SocketUdpModel::hasData()
+{
+    return !datagram.isEmpty();
+}
+
 void SocketUdpModel::startTransmission(){
+    if(!hasData()) throw NoDataToSend();
+
     if(status == OFF){
         timer->start();
         status = ON;

@@ -70,6 +70,21 @@ int MainWindow::getSelectedRowIndex()
     return ui->listView->selectionModel()->selectedRows().first().row();
 }
 
+void MainWindow::setDoubleValidator(QDoubleValidator *validator)
+{
+    ui->lineEdit->setValidator(validator);
+}
+
+void MainWindow::disableAcceptButton()
+{
+    ui->acceptButton->setEnabled(false);
+}
+
+void MainWindow::enableAcceptButton()
+{
+    ui->acceptButton->setEnabled(true);
+}
+
 void MainWindow::on_addButton_clicked()
 {
     presenter->onAddButtonPressed();

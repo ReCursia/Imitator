@@ -1,7 +1,7 @@
 #ifndef SOCKETUDPCONTRACT_H
 #define SOCKETUDPCONTRACT_H
 
-#include <QObject>
+#include "QDoubleValidator"
 #include <QStringListModel>
 
 class SocketUdpContractView
@@ -23,6 +23,10 @@ public:
     virtual int getSelectedRowIndex() = 0;
     //Line edit
     virtual QString getEditLineText() = 0;
+    virtual void setDoubleValidator(QDoubleValidator* validator) = 0;
+    //Accept button
+    virtual void disableAcceptButton() = 0;
+    virtual void enableAcceptButton() = 0;
 };
 
 #endif // SOCKETUDPCONTRACT_H

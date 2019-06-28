@@ -1,4 +1,6 @@
 #include "SocketUdpPresenter.h"
+#include "Exceptions/NoDataToSend.h"
+#include "Exceptions/EmptyData.h"
 
 SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
 {
@@ -9,6 +11,8 @@ SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
     view->setListModel(dataModel->getModel());
     //Led is OFF
     view->lightOffLed();
+    //Validator
+    view->setDoubleValidator(dataModel->getValidator());
 }
 
 SocketUdpPresenter::~SocketUdpPresenter()
@@ -22,20 +26,41 @@ void SocketUdpPresenter::stopTransmission()
 {
     socketModel->stopTransmission();
     view->lightOffLed();
+    view->enableAcceptButton();
     view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
 }
 
 void SocketUdpPresenter::startTransmission()
 {
-    socketModel->startTransmission();
-    view->lightOnLed();
-    view->setStartButtonLabel(START_BUTTON_MESSAGE[STOP]);
+    try {
+        socketModel->startTransmission();
+        view->lightOnLed();
+        view->disableAcceptButton();
+        view->setStartButtonLabel(START_BUTTON_MESSAGE[STOP]);
+    } catch (NoDataToSend&) {
+        handleNoDataToSend();
+    }
+
+}
+
+void SocketUdpPresenter::handleNoDataToAccept()
+{
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_ACCEPT]);
+}
+
+void SocketUdpPresenter::handleNoDataToSend()
+{
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_SEND]);
 }
 
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
-    socketModel->setDatagramData(dataModel->getDatagram());
-    view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
+    try {
+        socketModel->setDatagramData(dataModel->getDatagram());
+        view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
+    } catch (EmptyData&) {
+        handleNoDataToAccept();
+    }
 }
 
 void SocketUdpPresenter::onStartButtonPressed()

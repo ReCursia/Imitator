@@ -1,16 +1,20 @@
 #ifndef DATAMODEL_H
 #define DATAMODEL_H
 
+#include "QObject"
 #include "QList"
 #include "QStringListModel"
+#include <QDoubleValidator>
 
-class DataModel
+class DataModel : public QObject
 {
 private:
     QStringList values;
     QStringListModel* model;
+    QDoubleValidator* validator;
 private:
     double getCheckSum();
+    bool hasData();
 public:
     DataModel();
     ~DataModel();
@@ -18,6 +22,7 @@ public:
     void deleteValue(int i);
     QByteArray getDatagram();
     QStringListModel* getModel();
+    QDoubleValidator* getValidator();
 };
 
 #endif // DATAMODEL_H

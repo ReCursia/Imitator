@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <Presenter/SocketUdpPresenter.h>
-#include "Contract/SocketUdpContractView.h"
+#include "Contracts/SocketUdpContractView.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,6 +35,9 @@ public:
     QString getEditLineText();
     bool hasSelectedRow();
     int getSelectedRowIndex();
+    void setDoubleValidator(QDoubleValidator *validator);
+    void disableAcceptButton();
+    void enableAcceptButton();
 };
 
 #endif // MAINWINDOW_H
