@@ -25,6 +25,16 @@ void MainWindow::on_startButton_clicked()
     presenter->onStartButtonPressed();
 }
 
+void MainWindow::on_addButton_clicked()
+{
+    presenter->onAddButtonPressed();
+}
+
+void MainWindow::on_deleteButton_clicked()
+{
+    presenter->onDeleteButtonPressed();
+}
+
 void MainWindow::setStartButtonLabel(QString str)
 {
     ui->startButton->setText(str);
@@ -83,14 +93,4 @@ void MainWindow::disableAcceptButton()
 void MainWindow::enableAcceptButton()
 {
     ui->acceptButton->setEnabled(true);
-}
-
-void MainWindow::on_addButton_clicked()
-{
-    presenter->onAddButtonPressed();
-}
-
-void MainWindow::on_deleteButton_clicked()
-{
-    presenter->onDeleteButtonPressed();
 }

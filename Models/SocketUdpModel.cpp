@@ -41,11 +41,6 @@ QString SocketUdpModel::getCurrentStatusMessage()
     }
 }
 
-bool SocketUdpModel::hasData()
-{
-    return !datagram.isEmpty();
-}
-
 void SocketUdpModel::startTransmission()
 {
     if(!hasData()) throw NoDataToSend();
@@ -54,6 +49,11 @@ void SocketUdpModel::startTransmission()
         status = ON;
     }
     presenter->statusBarMessageChanged(getCurrentStatusMessage());
+}
+
+bool SocketUdpModel::hasData()
+{
+    return !datagram.isEmpty();
 }
 
 void SocketUdpModel::stopTransmission()

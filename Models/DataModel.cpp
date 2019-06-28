@@ -41,6 +41,11 @@ QByteArray DataModel::getDatagram()
     return datagram;
 }
 
+bool DataModel::hasData()
+{
+    return !values.isEmpty();
+}
+
 double DataModel::getCheckSum()
 {
     double sum = 0;
@@ -48,11 +53,6 @@ double DataModel::getCheckSum()
         sum += value.toDouble();
     }
     return sum;
-}
-
-bool DataModel::hasData()
-{
-    return !values.isEmpty();
 }
 
 QStringListModel *DataModel::getModel()

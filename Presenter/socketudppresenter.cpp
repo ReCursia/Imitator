@@ -22,12 +22,16 @@ SocketUdpPresenter::~SocketUdpPresenter()
     delete view;
 }
 
-void SocketUdpPresenter::stopTransmission()
+void SocketUdpPresenter::onStartButtonPressed()
 {
-    socketModel->stopTransmission();
-    view->lightOffLed();
-    view->enableAcceptButton();
-    view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
+    switch(socketModel->getCurrentStatus()){
+    case OFF:
+        startTransmission();
+        break;
+    case ON:
+        stopTransmission();
+        break;
+    }
 }
 
 void SocketUdpPresenter::startTransmission()
@@ -42,9 +46,12 @@ void SocketUdpPresenter::startTransmission()
     }
 }
 
-void SocketUdpPresenter::handleNoDataToAccept()
+void SocketUdpPresenter::stopTransmission()
 {
-    view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_ACCEPT]);
+    socketModel->stopTransmission();
+    view->lightOffLed();
+    view->enableAcceptButton();
+    view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
 }
 
 void SocketUdpPresenter::handleNoDataToSend()
@@ -62,16 +69,9 @@ void SocketUdpPresenter::onAcceptButtonPressed()
     }
 }
 
-void SocketUdpPresenter::onStartButtonPressed()
+void SocketUdpPresenter::handleNoDataToAccept()
 {
-    switch(socketModel->getCurrentStatus()){
-    case OFF:
-        startTransmission();
-        break;
-    case ON:
-        stopTransmission();
-        break;
-    }
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_ACCEPT]);
 }
 
 void SocketUdpPresenter::onAddButtonPressed()
