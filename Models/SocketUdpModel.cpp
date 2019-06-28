@@ -2,7 +2,8 @@
 #include "QDebug"
 #include "Exceptions/NoDataToSend.h"
 
-SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
+SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter)
+{
     this->presenter = presenter;
     //Status
     status = OFF;
@@ -18,7 +19,8 @@ SocketUdpModel::SocketUdpModel(SocketUdpContractPresenter* presenter){
     socket->bind(address,SENDER_HOST);
 }
 
-SocketUdpModel::~SocketUdpModel(){
+SocketUdpModel::~SocketUdpModel()
+{
     delete socket;
     delete timer;
     delete presenter;
@@ -44,9 +46,9 @@ bool SocketUdpModel::hasData()
     return !datagram.isEmpty();
 }
 
-void SocketUdpModel::startTransmission(){
+void SocketUdpModel::startTransmission()
+{
     if(!hasData()) throw NoDataToSend();
-
     if(status == OFF){
         timer->start();
         status = ON;
@@ -54,7 +56,8 @@ void SocketUdpModel::startTransmission(){
     presenter->statusBarMessageChanged(getCurrentStatusMessage());
 }
 
-void SocketUdpModel::stopTransmission(){
+void SocketUdpModel::stopTransmission()
+{
     if(status == ON){
         timer->stop();
         status = OFF;
@@ -68,7 +71,8 @@ void SocketUdpModel::setDatagramData(QByteArray array)
 }
 
 
-void SocketUdpModel::sendDatagram(){
+void SocketUdpModel::sendDatagram()
+{
     socket->writeDatagram(datagram,address,RECEIVER_PORT); //Port 1234 ex.
     qDebug() << QString::fromStdString(datagram.toStdString());
     presenter->counterValueChanged(++transmissionCounter);

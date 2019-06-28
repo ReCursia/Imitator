@@ -40,7 +40,6 @@ void SocketUdpPresenter::startTransmission()
     } catch (NoDataToSend&) {
         handleNoDataToSend();
     }
-
 }
 
 void SocketUdpPresenter::handleNoDataToAccept()
