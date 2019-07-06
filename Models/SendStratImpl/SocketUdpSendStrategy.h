@@ -4,15 +4,14 @@
 #include <QObject>
 #include <QUdpSocket>
 
-#include <Utilities/SendStrategy.h>
+#include <Utilities/sendstrategy.h>
 
 const quint16 RECEIVER_PORT = 3456;
 const quint16 SENDER_HOST = 1234;
 
-class SocketUdpSendStrategy: public QObject, public SendStrategy
+class SocketUdpSendStrategy: public SendStrategy
 {
 private:
-    Q_OBJECT
     QUdpSocket* socket;
     QHostAddress address;
 public:

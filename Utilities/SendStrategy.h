@@ -2,12 +2,12 @@
 #define SENDSTRATEGY_H
 
 #include <QByteArray>
+#include "QDebug"
 
 class SendStrategy
 {
 public:
-    SendStrategy(){}
-    virtual ~SendStrategy(){}
+    virtual ~SendStrategy() = 0;
     virtual void sendDatagramData(QByteArray array) = 0;
 };
 

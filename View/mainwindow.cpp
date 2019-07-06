@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     delete presenter;
+    delete ui;
 }
 
 void MainWindow::on_acceptButton_clicked()

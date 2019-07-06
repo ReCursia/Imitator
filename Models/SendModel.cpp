@@ -19,8 +19,8 @@ SendModel::SendModel()
 
 SendModel::~SendModel()
 {
-    delete timer;
     delete strategy;
+    delete timer;
 }
 
 Status SendModel::getCurrentStatus()

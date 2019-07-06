@@ -3,7 +3,7 @@
 SocketUdpSendStrategy::SocketUdpSendStrategy()
 {
     //Socket
-    socket = new QUdpSocket(this);
+    socket = new QUdpSocket();
     address.setAddress(QHostAddress::LocalHost);
     socket->bind(address,SENDER_HOST);
 }

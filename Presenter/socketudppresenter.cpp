@@ -27,7 +27,6 @@ SocketUdpPresenter::~SocketUdpPresenter()
 {
     delete sendModel;
     delete dataModel;
-    delete view;
 }
 
 void SocketUdpPresenter::onStartButtonPressed()
