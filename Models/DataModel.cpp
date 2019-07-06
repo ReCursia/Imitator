@@ -37,6 +37,7 @@ QByteArray DataModel::getDatagram()
     foreach(QString value,values){
         datagram.append(value).append(' ');
     }
+    //TODO добавить тики
     datagram.append(QString::number(getCheckSum()));
     return datagram;
 }

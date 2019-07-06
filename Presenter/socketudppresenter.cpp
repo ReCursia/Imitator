@@ -2,10 +2,12 @@
 #include "Exceptions/NoDataToSend.h"
 #include "Exceptions/EmptyData.h"
 
+#include <Models/SendStratImpl/SocketUdpSendStrategy.h>
+
 SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
 {
     this->view = view;
-    socketModel = new SocketUdpModel(this);
+    sendModel = new SendModel();
     dataModel = new DataModel();
     //Connect model to listView
     view->setListModel(dataModel->getModel());
@@ -13,18 +15,24 @@ SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
     view->lightOffLed();
     //Validator
     view->setDoubleValidator(dataModel->getValidator());
+    //Combo box
+    //TODO FIX THAT
+    for(int i = 0; i < 3; i++){
+        ComboBoxValues value = static_cast<ComboBoxValues>(i);
+        view->addItemToComboBox(COMBO_BOX_VALUES[value]);
+    }
 }
 
 SocketUdpPresenter::~SocketUdpPresenter()
 {
-    delete socketModel;
+    delete sendModel;
     delete dataModel;
     delete view;
 }
 
 void SocketUdpPresenter::onStartButtonPressed()
 {
-    switch(socketModel->getCurrentStatus()){
+    switch(sendModel->getCurrentStatus()){
     case OFF:
         startTransmission();
         break;
@@ -37,9 +45,10 @@ void SocketUdpPresenter::onStartButtonPressed()
 void SocketUdpPresenter::startTransmission()
 {
     try {
-        socketModel->startTransmission();
+        sendModel->startTransmission();
         view->lightOnLed();
         view->disableAcceptButton();
+        view->disableComboBox();
         view->setStartButtonLabel(START_BUTTON_MESSAGE[STOP]);
     } catch (NoDataToSend&) {
         handleNoDataToSend();
@@ -48,9 +57,10 @@ void SocketUdpPresenter::startTransmission()
 
 void SocketUdpPresenter::stopTransmission()
 {
-    socketModel->stopTransmission();
+    sendModel->stopTransmission();
     view->lightOffLed();
     view->enableAcceptButton();
+    view->enableComboBox();
     view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
 }
 
@@ -62,10 +72,23 @@ void SocketUdpPresenter::handleNoDataToSend()
 void SocketUdpPresenter::onAcceptButtonPressed()
 {
     try {
-        socketModel->setDatagramData(dataModel->getDatagram());
+        sendModel->setDatagramData(dataModel->getDatagram());
         view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
     } catch (EmptyData&) {
         handleNoDataToAccept();
+    }
+}
+
+void SocketUdpPresenter::onCurrentComboBoxIndexChanged(int index)
+{
+    switch(index){
+    case UDP:
+        sendModel->setStrategy(new SocketUdpSendStrategy());
+        break;
+    case NAMED_PIPE:
+        break;
+    case SHARED_MEMORY:
+        break;
     }
 }
 
@@ -88,14 +111,4 @@ void SocketUdpPresenter::onDeleteButtonPressed()
     }else{
         view->setStatusBarMessage(STATUS_BAR_MESSAGE[CHOOSE_LINE]);
     }
-}
-
-void SocketUdpPresenter::counterValueChanged(int value)
-{
-    view->setCounterValue(value);
-}
-
-void SocketUdpPresenter::statusBarMessageChanged(QString message)
-{
-    view->setStatusBarMessage(message);
 }

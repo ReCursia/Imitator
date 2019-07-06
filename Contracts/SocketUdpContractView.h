@@ -7,7 +7,7 @@
 class SocketUdpContractView
 {
 public:
-    virtual ~SocketUdpContractView() = 0;
+    virtual ~SocketUdpContractView(){}
     //Start button
     virtual void setStartButtonLabel(QString str) = 0;
     //Counter
@@ -27,6 +27,10 @@ public:
     //Accept button
     virtual void disableAcceptButton() = 0;
     virtual void enableAcceptButton() = 0;
+    //Combo box
+    virtual void disableComboBox() = 0;
+    virtual void enableComboBox() = 0;
+    virtual void addItemToComboBox(QString value) = 0;
 };
 
 #endif // SOCKETUDPCONTRACT_H

@@ -6,37 +6,32 @@
 #include "QTimer"
 #include "QStringListModel"
 #include "DataModel.h"
-#include <Contracts/SocketUdpContractPresenter.h>
+#include <Utilities/SendStrategy.h>
 
 enum Status {OFF,ON};
 
 const int REPEAT_INTERVAL = 1000; //ms
-const int HEADER = 0x55AA;
-const quint16 RECEIVER_PORT = 3456;
-const quint16 SENDER_HOST = 1234;
 
-class SocketUdpModel: public QObject
+class SendModel: public QObject
 {
 private:
     Q_OBJECT
     int transmissionCounter;
     Status status;
-    QUdpSocket* socket;
-    QHostAddress address;
     QTimer* timer;
-    SocketUdpContractPresenter* presenter;
     QByteArray datagram;
-    QString getCurrentStatusMessage();
+    SendStrategy* strategy;
     bool hasData();
 private slots:
     void sendDatagram();
 public:
-    SocketUdpModel(SocketUdpContractPresenter* presenter);
-    ~SocketUdpModel();
+    SendModel();
+    ~SendModel();
     Status getCurrentStatus();
     void startTransmission();
     void stopTransmission();
     void setDatagramData(QByteArray array);
+    void setStrategy(SendStrategy* newStrategy);
 };
 
 

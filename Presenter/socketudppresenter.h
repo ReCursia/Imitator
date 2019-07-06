@@ -2,8 +2,7 @@
 #define SOCKETUDPPRESENTER_H
 
 #include <QObject>
-#include <Models/SocketUdpModel.h>
-#include <Contracts/SocketUdpContractPresenter.h>
+#include <Models/SendModel.h>
 #include <Contracts/SocketUdpContractView.h>
 
 const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен","Нет данных для отправления","Нет данных для утверждения"};
@@ -12,11 +11,14 @@ enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED,NO_DATA_TO_SEND
 const QStringList START_BUTTON_MESSAGE = {"Запуск","Остановка"};
 enum StartButtonMessage {START,STOP};
 
-class SocketUdpPresenter: public QObject, public SocketUdpContractPresenter
+const QStringList COMBO_BOX_VALUES = {"UDP","Named pipe","Shared memory"};
+enum ComboBoxValues {UDP,NAMED_PIPE,SHARED_MEMORY};
+
+class SocketUdpPresenter: public QObject
 {
 private:
     Q_OBJECT
-    SocketUdpModel* socketModel;
+    SendModel* sendModel;
     DataModel* dataModel;
     SocketUdpContractView* view;
 private:
@@ -28,11 +30,10 @@ public:
     SocketUdpPresenter(SocketUdpContractView* view);
     ~SocketUdpPresenter();
     void onAcceptButtonPressed();
+    void onCurrentComboBoxIndexChanged(int index);
     void onStartButtonPressed();
     void onAddButtonPressed();
     void onDeleteButtonPressed();
-    void counterValueChanged(int value);
-    void statusBarMessageChanged(QString message);
 };
 
 #endif // SOCKETUDPPRESENTER_H

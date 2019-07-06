@@ -20,6 +20,8 @@ private slots:
     void on_startButton_clicked();
     void on_addButton_clicked();
     void on_deleteButton_clicked();
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     SocketUdpPresenter* presenter;
@@ -38,6 +40,9 @@ public:
     void setDoubleValidator(QDoubleValidator *validator);
     void disableAcceptButton();
     void enableAcceptButton();
+    void addItemToComboBox(QString value);
+    void disableComboBox();
+    void enableComboBox();
 };
 
 #endif // MAINWINDOW_H

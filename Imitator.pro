@@ -25,28 +25,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Contracts/SocketUdpContractPresenter.cpp \
-        Contracts/SocketUdpContractView.cpp \
         Led/Led.cpp \
         Models/DataModel.cpp \
-        Models/SocketUdpModel.cpp \
+        Models/SendModel.cpp \
+        Models/SendStratImpl/SocketUdpSendStrategy.cpp \
         Presenter/SocketUdpPresenter.cpp \
         main.cpp \
         View\mainWindow.cpp
 
 HEADERS += \
-        Contracts/SocketUdpContractPresenter.h \
         Contracts/SocketUdpContractView.h \
-    Exceptions/EmptyData.h \
-    Exceptions/NoDataToSend.h \
+        Exceptions/EmptyData.h \
+        Exceptions/NoDataToSend.h \
         Led/Led.h \
         Models/DataModel.h \
-        Models/SocketUdpModel.h \
+        Models/SendModel.h \
+        Models/SendStratImpl/SocketUdpSendStrategy.h \
         Presenter/SocketUdpPresenter.h \
+        Utilities/SendStrategy.h \
         View\mainWindow.h \
 
 FORMS += \
-        View\mainwindow.ui
+        View\MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

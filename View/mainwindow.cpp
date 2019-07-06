@@ -94,3 +94,23 @@ void MainWindow::enableAcceptButton()
 {
     ui->acceptButton->setEnabled(true);
 }
+
+void MainWindow::addItemToComboBox(QString value)
+{
+    ui->comboBox->addItem(value);
+}
+
+void MainWindow::disableComboBox()
+{
+    ui->comboBox->setEnabled(false);
+}
+
+void MainWindow::enableComboBox()
+{
+   ui->comboBox->setEnabled(true);
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    presenter->onCurrentComboBoxIndexChanged(index);
+}
