@@ -6,20 +6,22 @@ SharedMemorySendStrategy::SharedMemorySendStrategy()
 {
     sharedMemory = new QSharedMemory();
     sharedMemory->setKey(SHARED_MEMORY_NAME);
-    semaphore = new QSystemSemaphore(SEMAPHORE_NAME,1,QSystemSemaphore::Create);
+    freeToWrite = new QSystemSemaphore(SEMAPHORE_NAME_WRITE,1,QSystemSemaphore::Create);
+    freeToRead = new QSystemSemaphore(SEMAPHORE_NAME_READ,0,QSystemSemaphore::Create);
 }
 
 SharedMemorySendStrategy::~SharedMemorySendStrategy()
 {
     delete sharedMemory;
-    delete semaphore;
+    delete freeToRead;
+    delete freeToWrite;
 }
 
 void SharedMemorySendStrategy::sendDatagramData(QByteArray array)
 {
-    semaphore->acquire();
+    freeToWrite->acquire();
     sharedMemory->create(array.size());
     char* to = (char*)sharedMemory->data();
     memcpy(to,array,qMin(sharedMemory->size(),array.size()));
-    semaphore->release(1);
+    freeToRead->release(1);
 }

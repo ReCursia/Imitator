@@ -6,14 +6,16 @@
 #include <QSharedMemory>
 #include <QSystemSemaphore>
 
-const QString SEMAPHORE_NAME = "SemaphoreName";
+const QString SEMAPHORE_NAME_WRITE = "SemaphoreNameWrite";
+const QString SEMAPHORE_NAME_READ = "SemaphoreNameRead";
 const QString SHARED_MEMORY_NAME = "SharedMemoryName";
 
 class SharedMemorySendStrategy : public SendStrategy
 {
 private:
     QSharedMemory* sharedMemory;
-    QSystemSemaphore* semaphore;
+    QSystemSemaphore* freeToWrite;
+    QSystemSemaphore* freeToRead;
 public:
     SharedMemorySendStrategy();
     ~SharedMemorySendStrategy();
