@@ -7,7 +7,7 @@
 class SendStrategy
 {
 public:
-    virtual ~SendStrategy(){}
+    virtual ~SendStrategy();
     virtual void sendDatagramData(QByteArray array) = 0;
 };
 

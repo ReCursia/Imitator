@@ -16,7 +16,7 @@ NamedPipeSendStrategy::NamedPipeSendStrategy()
 
 NamedPipeSendStrategy::~NamedPipeSendStrategy()
 {
-    server->close();
+    //server->close();
     delete server;
 }
 

@@ -82,7 +82,6 @@ void SocketUdpPresenter::onCurrentComboBoxIndexChanged(int index)
 {
     switch(index){
     case UDP:
-        qDebug() << "HELLO";
         sendModel->setSendStrategy(new SocketUdpSendStrategy());
         break;
     case NAMED_PIPE:

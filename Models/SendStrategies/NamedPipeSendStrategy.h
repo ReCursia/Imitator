@@ -7,7 +7,6 @@
 #include <QLocalServer>
 #include <QLocalSocket>
 
-
 class NamedPipeSendStrategy : public QObject, public SendStrategy
 {
 private:

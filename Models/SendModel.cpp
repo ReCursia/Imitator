@@ -1,4 +1,5 @@
 #include <Models/SendStrategies/NamedPipeSendStrategy.h>
+#include <Models/SendStrategies/SharedMemorySendStrategy.h>
 #include <Models/SendStrategies/SocketUdpSendStrategy.h>
 #include "SendModel.h"
 #include "Exceptions/NoDataToSend.h"
@@ -17,7 +18,8 @@ SendModel::SendModel()
     timer->setInterval(REPEAT_INTERVAL);
     connect(timer,SIGNAL(timeout()),this,SLOT(sendDatagram()));
     //Default strategy
-    //strategy = new SocketUdpSendStrategy();
+    sendStrategy = new SharedMemorySendStrategy();
+    //sendStrategy = nullptr;
 }
 
 SendModel::~SendModel()
@@ -60,8 +62,8 @@ void SendModel::setDatagramData(QByteArray array)
 
 void SendModel::setSendStrategy(SendStrategy* newStrategy)
 {
-    delete sendStrategy;
-    sendStrategy = newStrategy;
+    //delete sendStrategy;
+    //sendStrategy = newStrategy;
 }
 
 
