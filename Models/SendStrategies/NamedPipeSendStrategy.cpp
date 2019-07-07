@@ -5,13 +5,7 @@
 NamedPipeSendStrategy::NamedPipeSendStrategy()
 {
     server = new QLocalServer();
-    server->listen("EXAMPLE");
-    //EXAMPLE CLIENT
-    /*
-    exampleClient = new QLocalSocket();
-    exampleClient->connectToServer("EXAMPLE");
-    connect(exampleClient,SIGNAL(readyRead()),this,SLOT(readData()));
-    */
+    server->listen(PIPE_NAME);
 }
 
 NamedPipeSendStrategy::~NamedPipeSendStrategy()
@@ -32,13 +26,3 @@ void NamedPipeSendStrategy::sendDatagramData(QByteArray array)
         throw new SendError();
     }
 }
-
-/*
-void NamedPipeSendStrategy::readData()
-{
-    QString data = exampleClient->readAll();
-    qDebug() << data;
-    exampleClient->abort();
-    exampleClient->connectToServer("EXAMPLE");
-}
-*/

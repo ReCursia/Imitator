@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <Presenter/SocketUdpPresenter.h>
-#include "Contracts/SocketUdpContractView.h"
+#include <Presenter/SendPresenter.h>
+#include "Contracts/SendContractView.h"
 
 namespace Ui {
 class MainWindow;
@@ -12,7 +12,7 @@ class MainWindow;
 const int STATUS_BAR_DEFAULT_TIMEOUT = 5000; //ms
 
 
-class MainWindow : public QMainWindow, public SocketUdpContractView
+class MainWindow : public QMainWindow, public SendContractView
 {
     Q_OBJECT
 private slots:
@@ -24,7 +24,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SocketUdpPresenter* presenter;
+    SendPresenter* presenter;
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

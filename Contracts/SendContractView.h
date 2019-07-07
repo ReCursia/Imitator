@@ -4,10 +4,10 @@
 #include "QDoubleValidator"
 #include <QStringListModel>
 
-class SocketUdpContractView
+class SendContractView
 {
 public:
-    virtual ~SocketUdpContractView();
+    virtual ~SendContractView();
     //Start button
     virtual void setStartButtonLabel(QString str) = 0;
     //Counter

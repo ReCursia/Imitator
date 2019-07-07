@@ -7,16 +7,14 @@
 #include <QLocalServer>
 #include <QLocalSocket>
 
+const QString PIPE_NAME = "PipeName";
+
 class NamedPipeSendStrategy : public QObject, public SendStrategy
 {
 private:
     Q_OBJECT
     QLocalServer* server;
     QLocalSocket* clientConnection;
-    //CLIENT
-    //QLocalSocket* exampleClient;
-private slots:
-    //void readData();
 public:
     NamedPipeSendStrategy();
     ~NamedPipeSendStrategy();

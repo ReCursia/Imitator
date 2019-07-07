@@ -25,31 +25,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        Contracts/socketudpcontractview.cpp \
+        Contracts/SendContractView.cpp \
         Led/Led.cpp \
         Models/SendStrategies/NamedPipeSendStrategy.cpp \
         Models/SendStrategies/SharedMemorySendStrategy.cpp \
         Models/SendStrategies/SocketUdpSendStrategy.cpp \
         Models/DataModel.cpp \
         Models/SendModel.cpp \
-        Presenter/SocketUdpPresenter.cpp \
+        Presenter/SendPresenter.cpp \
         Utilities/SendStrategy.cpp \
         main.cpp \
         View\mainWindow.cpp
 
 HEADERS += \
-        Contracts/SocketUdpContractView.h \
+    Contracts/SendContractView.h \
         Exceptions/EmptyData.h \
         Exceptions/NoDataToSend.h \
         Exceptions/SendError.h \
         Led/Led.h \
     Models/SendStrategies/SharedMemorySendStrategy.h \
+    Presenter/SendPresenter.h \
         Utilities/SendStrategy.h \
         Models/SendStrategies/NamedPipeSendStrategy.h \
         Models/SendStrategies/SocketUdpSendStrategy.h \
         Models/DataModel.h \
         Models/SendModel.h \
-        Presenter/SocketUdpPresenter.h \
         View\mainWindow.h \
 
 FORMS += \

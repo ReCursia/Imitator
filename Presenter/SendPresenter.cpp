@@ -1,10 +1,10 @@
-#include "SocketUdpPresenter.h"
+#include "SendPresenter.h"
 #include "Exceptions/NoDataToSend.h"
 #include "Exceptions/EmptyData.h"
 #include <Models/SendStrategies/NamedPipeSendStrategy.h>
 #include <Models/SendStrategies/SocketUdpSendStrategy.h>
 
-SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
+SendPresenter::SendPresenter(SendContractView* view)
 {
     this->view = view;
     sendModel = new SendModel();
@@ -23,13 +23,13 @@ SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
     }
 }
 
-SocketUdpPresenter::~SocketUdpPresenter()
+SendPresenter::~SendPresenter()
 {
     delete sendModel;
     delete dataModel;
 }
 
-void SocketUdpPresenter::onStartButtonPressed()
+void SendPresenter::onStartButtonPressed()
 {
     switch(sendModel->getCurrentStatus()){
     case OFF:
@@ -41,7 +41,7 @@ void SocketUdpPresenter::onStartButtonPressed()
     }
 }
 
-void SocketUdpPresenter::startTransmission()
+void SendPresenter::startTransmission()
 {
     try {
         sendModel->startTransmission();
@@ -54,7 +54,7 @@ void SocketUdpPresenter::startTransmission()
     }
 }
 
-void SocketUdpPresenter::stopTransmission()
+void SendPresenter::stopTransmission()
 {
     sendModel->stopTransmission();
     view->lightOffLed();
@@ -63,12 +63,12 @@ void SocketUdpPresenter::stopTransmission()
     view->setStartButtonLabel(START_BUTTON_MESSAGE[START]);
 }
 
-void SocketUdpPresenter::handleNoDataToSend()
+void SendPresenter::handleNoDataToSend()
 {
     view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_SEND]);
 }
 
-void SocketUdpPresenter::onAcceptButtonPressed()
+void SendPresenter::onAcceptButtonPressed()
 {
     try {
         sendModel->setDatagramData(dataModel->getDatagram());
@@ -78,7 +78,7 @@ void SocketUdpPresenter::onAcceptButtonPressed()
     }
 }
 
-void SocketUdpPresenter::onCurrentComboBoxIndexChanged(int index)
+void SendPresenter::onCurrentComboBoxIndexChanged(int index)
 {
     switch(index){
     case UDP:
@@ -92,18 +92,18 @@ void SocketUdpPresenter::onCurrentComboBoxIndexChanged(int index)
     }
 }
 
-void SocketUdpPresenter::handleNoDataToAccept()
+void SendPresenter::handleNoDataToAccept()
 {
     view->setStatusBarMessage(STATUS_BAR_MESSAGE[NO_DATA_TO_ACCEPT]);
 }
 
-void SocketUdpPresenter::onAddButtonPressed()
+void SendPresenter::onAddButtonPressed()
 {
     dataModel->addValue(view->getEditLineText());
     view->setStatusBarMessage(STATUS_BAR_MESSAGE[LINE_ADDED]);
 }
 
-void SocketUdpPresenter::onDeleteButtonPressed()
+void SendPresenter::onDeleteButtonPressed()
 {
     if(view->hasSelectedRow()){
         dataModel->deleteValue(view->getSelectedRowIndex());

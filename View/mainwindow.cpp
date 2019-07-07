@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    presenter = new SocketUdpPresenter(this);
+    presenter = new SendPresenter(this);
 }
 
 MainWindow::~MainWindow()
