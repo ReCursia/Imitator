@@ -14,10 +14,9 @@ enum StartButtonMessage {START,STOP};
 const QStringList COMBO_BOX_VALUES = {"UDP","Named pipe","Shared memory"};
 enum ComboBoxValues {UDP,NAMED_PIPE,SHARED_MEMORY};
 
-class SocketUdpPresenter: public QObject
+class SocketUdpPresenter
 {
 private:
-    Q_OBJECT
     SendModel* sendModel;
     DataModel* dataModel;
     SocketUdpContractView* view;

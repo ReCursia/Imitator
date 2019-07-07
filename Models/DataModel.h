@@ -6,7 +6,7 @@
 #include "QStringListModel"
 #include <QDoubleValidator>
 
-class DataModel : public QObject
+class DataModel
 {
 private:
     QStringList values;

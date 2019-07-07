@@ -1,7 +1,10 @@
+#include <Models/SendStrategies/NamedPipeSendStrategy.h>
+#include <Models/SendStrategies/SocketUdpSendStrategy.h>
 #include "SendModel.h"
-#include "QDebug"
 #include "Exceptions/NoDataToSend.h"
-#include <Models/SendStratImpl/SocketUdpSendStrategy.h>
+#include <Exceptions/SendError.h>
+#include "QObject"
+#include "QDebug"
 
 SendModel::SendModel()
 {
@@ -12,14 +15,14 @@ SendModel::SendModel()
     //Timer
     timer = new QTimer();
     timer->setInterval(REPEAT_INTERVAL);
-    connect(timer,SIGNAL(timeout()),SLOT(sendDatagram()));
+    connect(timer,SIGNAL(timeout()),this,SLOT(sendDatagram()));
     //Default strategy
-    strategy = new SocketUdpSendStrategy();
+    //strategy = new SocketUdpSendStrategy();
 }
 
 SendModel::~SendModel()
 {
-    delete strategy;
+    delete sendStrategy;
     delete timer;
 }
 
@@ -55,15 +58,19 @@ void SendModel::setDatagramData(QByteArray array)
     datagram = array;
 }
 
-void SendModel::setStrategy(SendStrategy* newStrategy)
+void SendModel::setSendStrategy(SendStrategy* newStrategy)
 {
-    delete strategy;
-    strategy = newStrategy;
+    delete sendStrategy;
+    sendStrategy = newStrategy;
 }
 
 
 void SendModel::sendDatagram()
 {
-    strategy->sendDatagramData(datagram);
-    //presenter->counterValueChanged(++transmissionCounter);
+    try {
+       sendStrategy->sendDatagramData(datagram);
+       //presenter->counterValueChanged(++transmissionCounter);
+    } catch (SendError err) {
+        //TODO notify presenter about ERROR (he might translate error message to Status bar
+    }
 }

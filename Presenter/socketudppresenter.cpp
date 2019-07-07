@@ -1,8 +1,8 @@
 #include "SocketUdpPresenter.h"
 #include "Exceptions/NoDataToSend.h"
 #include "Exceptions/EmptyData.h"
-
-#include <Models/SendStratImpl/SocketUdpSendStrategy.h>
+#include <Models/SendStrategies/NamedPipeSendStrategy.h>
+#include <Models/SendStrategies/SocketUdpSendStrategy.h>
 
 SocketUdpPresenter::SocketUdpPresenter(SocketUdpContractView* view)
 {
@@ -82,9 +82,11 @@ void SocketUdpPresenter::onCurrentComboBoxIndexChanged(int index)
 {
     switch(index){
     case UDP:
-        sendModel->setStrategy(new SocketUdpSendStrategy());
+        qDebug() << "HELLO";
+        sendModel->setSendStrategy(new SocketUdpSendStrategy());
         break;
     case NAMED_PIPE:
+        sendModel->setSendStrategy(new NamedPipeSendStrategy());
         break;
     case SHARED_MEMORY:
         break;

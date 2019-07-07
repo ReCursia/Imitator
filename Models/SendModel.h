@@ -20,7 +20,7 @@ private:
     Status status;
     QTimer* timer;
     QByteArray datagram;
-    SendStrategy* strategy;
+    SendStrategy* sendStrategy;
     bool hasData();
 private slots:
     void sendDatagram();
@@ -31,7 +31,7 @@ public:
     void startTransmission();
     void stopTransmission();
     void setDatagramData(QByteArray array);
-    void setStrategy(SendStrategy* newStrategy);
+    void setSendStrategy(SendStrategy* newStrategy);
 };
 
 

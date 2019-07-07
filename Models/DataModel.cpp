@@ -4,7 +4,7 @@
 DataModel::DataModel()
 {
     //Validator
-    validator = new QDoubleValidator(this);
+    validator = new QDoubleValidator();
     validator->setNotation(QDoubleValidator::StandardNotation);
     validator->setLocale(QLocale(QLocale::English));
     //Model

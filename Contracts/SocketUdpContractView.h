@@ -7,7 +7,7 @@
 class SocketUdpContractView
 {
 public:
-    virtual ~SocketUdpContractView() = 0;
+    virtual ~SocketUdpContractView(){}
     //Start button
     virtual void setStartButtonLabel(QString str) = 0;
     //Counter
