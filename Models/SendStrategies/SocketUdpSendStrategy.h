@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QUdpSocket>
-
 #include <Utilities/SendStrategy.h>
 
 const quint16 RECEIVER_PORT = 3456;

@@ -20,8 +20,7 @@ SendPresenter::SendPresenter(SendContractView* view)
     //Validator
     view->setValidator(dataModel->getValidator());
     //Combo box
-    //TODO FIX THAT
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < COMBO_BOX_SIZE; i++){
         ComboBoxValues value = static_cast<ComboBoxValues>(i);
         view->addItemToComboBox(COMBO_BOX_VALUES[value]);
     }

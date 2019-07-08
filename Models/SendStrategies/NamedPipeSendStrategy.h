@@ -2,7 +2,6 @@
 #define NAMEDPIPESENDSTRATEGY_H
 
 #include <Utilities/SendStrategy.h>
-
 #include <QDataStream>
 #include <QLocalServer>
 #include <QLocalSocket>

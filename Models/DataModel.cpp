@@ -57,7 +57,7 @@ double DataModel::getCheckSum()
 {
     double sum = 0;
     foreach(QString value,values){
-        sum += value.toDouble();
+        sum += value.toInt();
     }
     return sum;
 }

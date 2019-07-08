@@ -3,8 +3,6 @@
 
 #include "EventListener.h"
 
-
-
 class EventManager
 {
 private:

@@ -22,7 +22,6 @@ SendModel::SendModel()
     eventManager = new EventManager();
     //Default strategy
     sendStrategy = new SocketUdpSendStrategy();
-    //sendStrategy = nullptr;
 }
 
 SendModel::~SendModel()
