@@ -4,7 +4,7 @@
 #include "QObject"
 #include "QList"
 #include "QStringListModel"
-#include <QDoubleValidator>
+#include <QValidator>
 
 const int MAX_VALUE = 2000;
 
@@ -15,7 +15,7 @@ private:
     QStringListModel* model;
     QIntValidator* validator;
 private:
-    double getCheckSum();
+    int getCheckSum();
     bool hasData();
 public:
     DataModel();

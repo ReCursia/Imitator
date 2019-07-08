@@ -20,7 +20,7 @@ DataModel::~DataModel()
 
 void DataModel::addValue(QString value)
 {
-    values.append(QString::number(value.toDouble()));
+    values.append(QString::number(value.toInt()));
     model->setStringList(values);
 }
 
@@ -53,9 +53,9 @@ bool DataModel::hasData()
     return !values.isEmpty();
 }
 
-double DataModel::getCheckSum()
+int DataModel::getCheckSum()
 {
-    double sum = 0;
+    int sum = 0;
     foreach(QString value,values){
         sum += value.toInt();
     }
