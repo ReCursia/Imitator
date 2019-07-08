@@ -80,7 +80,7 @@ int MainWindow::getSelectedRowIndex()
     return ui->listView->selectionModel()->selectedRows().first().row();
 }
 
-void MainWindow::setDoubleValidator(QDoubleValidator *validator)
+void MainWindow::setValidator(QValidator *validator)
 {
     ui->lineEdit->setValidator(validator);
 }
@@ -113,4 +113,14 @@ void MainWindow::enableComboBox()
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     presenter->onCurrentComboBoxIndexChanged(index);
+}
+
+void MainWindow::on_deleteAllButton_clicked()
+{
+    presenter->onDeleteAllButtonPressed();
+}
+
+void MainWindow::on_generateDataButton_clicked()
+{
+    presenter->onGenerateDataButtonPressed();
 }

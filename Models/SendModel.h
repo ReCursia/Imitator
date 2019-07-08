@@ -31,6 +31,7 @@ public:
     ~SendModel();
     Status getCurrentStatus();
     void startTransmission();
+    int getDatagramSize();
     void stopTransmission();
     void setDatagramData(QByteArray array);
     void setSendStrategy(SendStrategy* newStrategy);

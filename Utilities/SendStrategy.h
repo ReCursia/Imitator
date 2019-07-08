@@ -2,7 +2,6 @@
 #define SENDSTRATEGY_H
 
 #include <QByteArray>
-#include "QDebug"
 
 class SendStrategy
 {

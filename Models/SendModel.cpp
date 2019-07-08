@@ -6,6 +6,7 @@
 #include <Exceptions/SendError.h>
 #include "QObject"
 #include "QDebug"
+#include "sysinfoapi.h"
 
 SendModel::SendModel()
 {
@@ -20,7 +21,7 @@ SendModel::SendModel()
     //Event manager
     eventManager = new EventManager();
     //Default strategy
-    sendStrategy = new NamedPipeSendStrategy();
+    sendStrategy = new SocketUdpSendStrategy();
     //sendStrategy = nullptr;
 }
 
@@ -43,6 +44,11 @@ void SendModel::startTransmission()
         timer->start();
         status = ON;
     }
+}
+
+int SendModel::getDatagramSize()
+{
+    return datagram.size();
 }
 
 bool SendModel::hasData()
@@ -73,7 +79,9 @@ void SendModel::setSendStrategy(SendStrategy* newStrategy)
 void SendModel::sendDatagram()
 {
     try {
-        sendStrategy->sendDatagramData(datagram);
+        QByteArray newDatagram = datagram;
+        newDatagram.append(QString::number(GetTickCount()));
+        sendStrategy->sendDatagramData(newDatagram);
         eventManager->notify("counter",QString::number(++transmissionCounter));
     } catch (SendError& err) {
         eventManager->notify("errorMessage",err.getErrorMessage());

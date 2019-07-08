@@ -6,12 +6,14 @@
 #include "QStringListModel"
 #include <QDoubleValidator>
 
+const int MAX_VALUE = 2000;
+
 class DataModel
 {
 private:
     QStringList values;
     QStringListModel* model;
-    QDoubleValidator* validator;
+    QIntValidator* validator;
 private:
     double getCheckSum();
     bool hasData();
@@ -20,9 +22,11 @@ public:
     ~DataModel();
     void addValue(QString value);
     void deleteValue(int i);
+    void clear();
     QByteArray getDatagram();
     QStringListModel* getModel();
-    QDoubleValidator* getValidator();
+    QValidator* getValidator();
+    void generateRandomData();
 };
 
 #endif // DATAMODEL_H

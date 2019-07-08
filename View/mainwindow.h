@@ -22,6 +22,10 @@ private slots:
     void on_deleteButton_clicked();
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_deleteAllButton_clicked();
+
+    void on_generateDataButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     SendPresenter* presenter;
@@ -37,7 +41,7 @@ public:
     QString getEditLineText();
     bool hasSelectedRow();
     int getSelectedRowIndex();
-    void setDoubleValidator(QDoubleValidator *validator);
+    void setValidator(QValidator *validator);
     void disableAcceptButton();
     void enableAcceptButton();
     void addItemToComboBox(QString value);

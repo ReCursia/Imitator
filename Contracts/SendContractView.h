@@ -23,7 +23,7 @@ public:
     virtual int getSelectedRowIndex() = 0;
     //Line edit
     virtual QString getEditLineText() = 0;
-    virtual void setDoubleValidator(QDoubleValidator* validator) = 0;
+    virtual void setValidator(QValidator* validator) = 0;
     //Accept button
     virtual void disableAcceptButton() = 0;
     virtual void enableAcceptButton() = 0;

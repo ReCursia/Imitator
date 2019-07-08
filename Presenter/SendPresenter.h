@@ -7,8 +7,11 @@
 #include <Utilities/EventListener.h>
 #include <Utilities/EventManager.h>
 
-const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен","Нет данных для отправления","Нет данных для утверждения"};
-enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED,NO_DATA_TO_SEND,NO_DATA_TO_ACCEPT};
+const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления",
+                                        "Параметр успешно добавлен","Нет данных для отправления",
+                                        "Нет данных для утверждения","Данные удалены","Данные сгенерированы и добавлены"};
+
+enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED,NO_DATA_TO_SEND,NO_DATA_TO_ACCEPT,DELETED_ALL,DATA_GENERATED};
 
 const QStringList START_BUTTON_MESSAGE = {"Запуск","Остановка"};
 enum StartButtonMessage {START,STOP};
@@ -35,6 +38,8 @@ public:
     void onStartButtonPressed();
     void onAddButtonPressed();
     void onDeleteButtonPressed();
+    void onDeleteAllButtonPressed();
+    void onGenerateDataButtonPressed();
     void update(QString eventType, QString message);
 };
 

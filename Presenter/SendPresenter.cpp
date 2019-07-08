@@ -18,7 +18,7 @@ SendPresenter::SendPresenter(SendContractView* view)
     //Led is OFF
     view->lightOffLed();
     //Validator
-    view->setDoubleValidator(dataModel->getValidator());
+    view->setValidator(dataModel->getValidator());
     //Combo box
     //TODO FIX THAT
     for(int i = 0; i < 3; i++){
@@ -76,11 +76,13 @@ void SendPresenter::onAcceptButtonPressed()
 {
     try {
         sendModel->setDatagramData(dataModel->getDatagram());
-        view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]);
+        //TODO вынести получение сообщение в отдельную функцию
+        view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]+", размер данных (в байтах) = "+QString::number(sendModel->getDatagramSize()));
     } catch (EmptyData&) {
         handleNoDataToAccept();
     }
 }
+
 
 void SendPresenter::onCurrentComboBoxIndexChanged(int index)
 {
@@ -116,6 +118,18 @@ void SendPresenter::onDeleteButtonPressed()
     }else{
         view->setStatusBarMessage(STATUS_BAR_MESSAGE[CHOOSE_LINE]);
     }
+}
+
+void SendPresenter::onDeleteAllButtonPressed()
+{
+    dataModel->clear();
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[DELETED_ALL]);
+}
+
+void SendPresenter::onGenerateDataButtonPressed()
+{
+    dataModel->generateRandomData();
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[DATA_GENERATED]);
 }
 
 void SendPresenter::update(QString eventType, QString message)
