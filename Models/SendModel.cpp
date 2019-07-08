@@ -17,14 +17,17 @@ SendModel::SendModel()
     timer = new QTimer();
     timer->setInterval(REPEAT_INTERVAL);
     connect(timer,SIGNAL(timeout()),this,SLOT(sendDatagram()));
+    //Event manager
+    eventManager = new EventManager();
     //Default strategy
-    sendStrategy = new SharedMemorySendStrategy();
+    sendStrategy = new NamedPipeSendStrategy();
     //sendStrategy = nullptr;
 }
 
 SendModel::~SendModel()
 {
     delete sendStrategy;
+    delete eventManager;
     delete timer;
 }
 
@@ -70,9 +73,9 @@ void SendModel::setSendStrategy(SendStrategy* newStrategy)
 void SendModel::sendDatagram()
 {
     try {
-       sendStrategy->sendDatagramData(datagram);
-       //presenter->counterValueChanged(++transmissionCounter);
-    } catch (SendError err) {
-        //TODO notify presenter about ERROR (he might translate error message to Status bar
+        sendStrategy->sendDatagramData(datagram);
+        eventManager->notify("counter",QString::number(++transmissionCounter));
+    } catch (SendError& err) {
+        eventManager->notify("errorMessage",err.getErrorMessage());
     }
 }

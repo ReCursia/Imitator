@@ -8,6 +8,7 @@
 #include <QLocalSocket>
 
 const QString PIPE_NAME = "PipeName";
+const QString NO_CONNECTIONS = "Нет соединения с клиентом!";
 
 class NamedPipeSendStrategy : public QObject, public SendStrategy
 {

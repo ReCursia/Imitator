@@ -10,8 +10,8 @@ NamedPipeSendStrategy::NamedPipeSendStrategy()
 
 NamedPipeSendStrategy::~NamedPipeSendStrategy()
 {
-    //server->close();
     delete server;
+    delete clientConnection;
 }
 
 void NamedPipeSendStrategy::sendDatagramData(QByteArray array)
@@ -20,9 +20,10 @@ void NamedPipeSendStrategy::sendDatagramData(QByteArray array)
         clientConnection = server->nextPendingConnection();
         clientConnection->write(array);
         clientConnection->flush();
-        //clientConnection->disconnectFromServer();
+        clientConnection->disconnectFromServer();
     }
     else{
-        throw new SendError();
+        //TODO разобраться с исключениями
+        //throw new SendError(NO_CONNECTIONS);
     }
 }

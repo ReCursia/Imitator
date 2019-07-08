@@ -4,6 +4,8 @@
 #include <QObject>
 #include <Models/SendModel.h>
 #include <Contracts/SendContractView.h>
+#include <Utilities/EventListener.h>
+#include <Utilities/EventManager.h>
 
 const QStringList STATUS_BAR_MESSAGE = {"Данные утверждены","Параметр успешно удален","Выберите строку для удаления","Параметр успешно добавлен","Нет данных для отправления","Нет данных для утверждения"};
 enum StatusMessage {ACCEPTED,LINE_DELETED,CHOOSE_LINE,LINE_ADDED,NO_DATA_TO_SEND,NO_DATA_TO_ACCEPT};
@@ -14,7 +16,7 @@ enum StartButtonMessage {START,STOP};
 const QStringList COMBO_BOX_VALUES = {"UDP","Named pipe","Shared memory"};
 enum ComboBoxValues {UDP,NAMED_PIPE,SHARED_MEMORY};
 
-class SendPresenter
+class SendPresenter : public EventListener
 {
 private:
     SendModel* sendModel;
@@ -33,6 +35,7 @@ public:
     void onStartButtonPressed();
     void onAddButtonPressed();
     void onDeleteButtonPressed();
+    void update(QString eventType, QString message);
 };
 
 #endif // SOCKETUDPPRESENTER_H

@@ -37,8 +37,10 @@ QByteArray DataModel::getDatagram()
     foreach(QString value,values){
         datagram.append(value).append(' ');
     }
-    //TODO добавить тики
-    datagram.append(QString::number(getCheckSum()));
+    //Adding check sum
+    datagram.append(QString::number(getCheckSum())).append(' ');
+    //Adding tick count
+    datagram.append(QString::number(std::clock()));
     return datagram;
 }
 

@@ -2,12 +2,16 @@
 #include "Exceptions/NoDataToSend.h"
 #include "Exceptions/EmptyData.h"
 #include <Models/SendStrategies/NamedPipeSendStrategy.h>
+#include <Models/SendStrategies/SharedMemorySendStrategy.h>
 #include <Models/SendStrategies/SocketUdpSendStrategy.h>
 
 SendPresenter::SendPresenter(SendContractView* view)
 {
     this->view = view;
     sendModel = new SendModel();
+    //Subcribe to sendModel
+    sendModel->eventManager->subscribe(this);
+    //Data model
     dataModel = new DataModel();
     //Connect model to listView
     view->setListModel(dataModel->getModel());
@@ -88,6 +92,7 @@ void SendPresenter::onCurrentComboBoxIndexChanged(int index)
         sendModel->setSendStrategy(new NamedPipeSendStrategy());
         break;
     case SHARED_MEMORY:
+        sendModel->setSendStrategy(new SharedMemorySendStrategy());
         break;
     }
 }
@@ -110,5 +115,14 @@ void SendPresenter::onDeleteButtonPressed()
         view->setStatusBarMessage(STATUS_BAR_MESSAGE[LINE_DELETED]);
     }else{
         view->setStatusBarMessage(STATUS_BAR_MESSAGE[CHOOSE_LINE]);
+    }
+}
+
+void SendPresenter::update(QString eventType, QString message)
+{
+    if(eventType == "counter"){
+        view->setCounterValue(message.toInt());
+    }else if(eventType == "errorMessage"){
+        view->setStatusBarMessage(message);
     }
 }

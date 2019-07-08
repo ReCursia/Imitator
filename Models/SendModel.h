@@ -7,6 +7,7 @@
 #include "QStringListModel"
 #include "DataModel.h"
 #include <Utilities/SendStrategy.h>
+#include <Utilities/EventManager.h>
 
 enum Status {OFF,ON};
 
@@ -25,6 +26,7 @@ private:
 private slots:
     void sendDatagram();
 public:
+    EventManager* eventManager;
     SendModel();
     ~SendModel();
     Status getCurrentStatus();

@@ -19,9 +19,10 @@ SharedMemorySendStrategy::~SharedMemorySendStrategy()
 
 void SharedMemorySendStrategy::sendDatagramData(QByteArray array)
 {
+    int arraySize = array.size();
     freeToWrite->acquire();
-    sharedMemory->create(array.size());
+    sharedMemory->create(arraySize);
     char* to = (char*)sharedMemory->data();
-    memcpy(to,array,qMin(sharedMemory->size(),array.size()));
+    memcpy(to,array,qMin(sharedMemory->size(),arraySize));
     freeToRead->release(1);
 }

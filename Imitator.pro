@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         Contracts/SendContractView.cpp \
+        Exceptions/senderror.cpp \
         Led/Led.cpp \
         Models/SendStrategies/NamedPipeSendStrategy.cpp \
         Models/SendStrategies/SharedMemorySendStrategy.cpp \
@@ -33,6 +34,8 @@ SOURCES += \
         Models/DataModel.cpp \
         Models/SendModel.cpp \
         Presenter/SendPresenter.cpp \
+        Utilities/EventListener.cpp \
+        Utilities/EventManager.cpp \
         Utilities/SendStrategy.cpp \
         main.cpp \
         View\mainWindow.cpp
@@ -45,6 +48,8 @@ HEADERS += \
         Led/Led.h \
     Models/SendStrategies/SharedMemorySendStrategy.h \
     Presenter/SendPresenter.h \
+    Utilities/EventListener.h \
+    Utilities/EventManager.h \
         Utilities/SendStrategy.h \
         Models/SendStrategies/NamedPipeSendStrategy.h \
         Models/SendStrategies/SocketUdpSendStrategy.h \
