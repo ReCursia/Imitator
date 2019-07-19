@@ -1,7 +1,5 @@
 #include "NamedPipeSendStrategy.h"
 
-#include <Exceptions/senderror.h>
-
 NamedPipeSendStrategy::NamedPipeSendStrategy()
 {
     server = new QLocalServer();
@@ -21,8 +19,5 @@ void NamedPipeSendStrategy::sendDatagramData(QByteArray array)
         clientConnection->write(array);
         clientConnection->flush();
         clientConnection->disconnectFromServer();
-    }
-    else{
-        //throw new SendError(NO_CONNECTIONS);
     }
 }

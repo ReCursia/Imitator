@@ -75,13 +75,18 @@ void SendPresenter::onAcceptButtonPressed()
 {
     try {
         sendModel->setDatagramData(dataModel->getDatagram());
-        //TODO вынести получение сообщение в отдельную функцию
-        view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]+", размер данных (в байтах) = "+QString::number(sendModel->getDatagramSize()));
+        showStatusBarAcceptMessage();
     } catch (EmptyData&) {
         handleNoDataToAccept();
     }
 }
 
+void SendPresenter::showStatusBarAcceptMessage()
+{
+    view->setStatusBarMessage(STATUS_BAR_MESSAGE[ACCEPTED]+
+                              ", размер данных (в байтах) = "+
+                              QString::number(sendModel->getDatagramSize()));
+}
 
 void SendPresenter::onCurrentComboBoxIndexChanged(int index)
 {

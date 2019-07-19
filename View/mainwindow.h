@@ -21,11 +21,8 @@ private slots:
     void on_addButton_clicked();
     void on_deleteButton_clicked();
     void on_comboBox_currentIndexChanged(int index);
-
     void on_deleteAllButton_clicked();
-
     void on_generateDataButton_clicked();
-
 private:
     Ui::MainWindow *ui;
     SendPresenter* presenter;

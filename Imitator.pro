@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
         Contracts/SendContractView.cpp \
-        Exceptions/senderror.cpp \
         Led/Led.cpp \
         Models/SendStrategies/NamedPipeSendStrategy.cpp \
         Models/SendStrategies/SharedMemorySendStrategy.cpp \
@@ -44,7 +43,6 @@ HEADERS += \
     Contracts/SendContractView.h \
         Exceptions/EmptyData.h \
         Exceptions/NoDataToSend.h \
-        Exceptions/SendError.h \
         Led/Led.h \
     Models/SendStrategies/SharedMemorySendStrategy.h \
     Presenter/SendPresenter.h \

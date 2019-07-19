@@ -74,7 +74,7 @@ QValidator *DataModel::getValidator()
 
 void DataModel::generateRandomData()
 {
-    srand(time(nullptr));
+    srand(time(nullptr)); //to update seed
     for(int i = 0; i < MAX_VALUE;i++){
         values.append(QString::number((rand() % 1000)+500));
     }

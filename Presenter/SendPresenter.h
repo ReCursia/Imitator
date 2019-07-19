@@ -31,6 +31,7 @@ private:
     void startTransmission();
     void handleNoDataToSend();
     void handleNoDataToAccept();
+    void showStatusBarAcceptMessage();
 public:
     SendPresenter(SendContractView* view);
     ~SendPresenter();

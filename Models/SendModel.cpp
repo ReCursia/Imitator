@@ -3,7 +3,6 @@
 #include <Models/SendStrategies/SocketUdpSendStrategy.h>
 #include "SendModel.h"
 #include "Exceptions/NoDataToSend.h"
-#include <Exceptions/SendError.h>
 #include "QObject"
 #include "QDebug"
 #include "sysinfoapi.h"
@@ -70,19 +69,14 @@ void SendModel::setDatagramData(QByteArray array)
 
 void SendModel::setSendStrategy(SendStrategy* newStrategy)
 {
-    //delete sendStrategy;
-    //sendStrategy = newStrategy;
+    delete sendStrategy;
+    sendStrategy = newStrategy;
 }
-
 
 void SendModel::sendDatagram()
 {
-    try {
-        QByteArray newDatagram = datagram;
-        newDatagram.append(QString::number(GetTickCount()));
-        sendStrategy->sendDatagramData(newDatagram);
-        eventManager->notify("counter",QString::number(++transmissionCounter));
-    } catch (SendError& err) {
-        eventManager->notify("errorMessage",err.getErrorMessage());
-    }
+    QByteArray newDatagram = datagram;
+    newDatagram.append(QString::number(GetTickCount()));
+    sendStrategy->sendDatagramData(newDatagram);
+    eventManager->notify("counter",QString::number(++transmissionCounter));
 }
